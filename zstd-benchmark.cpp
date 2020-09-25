@@ -1,8 +1,6 @@
 #include <benchmark/benchmark.h>
 #include <iostream>
 #include <vector>
-#include <cuda_runtime_api.h>
-#include <cuda.h>
 #include "zstd.h"
 
 using namespace std; 
