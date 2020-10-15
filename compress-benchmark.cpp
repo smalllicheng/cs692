@@ -8,6 +8,14 @@
 using namespace std; 
 typedef std::chrono::high_resolution_clock Clock;
 
+
+void benchmark_assert(const bool pass, const std::string& msg)
+{
+  if (!pass) {
+    throw std::runtime_error("ERROR: " + msg);
+  }
+}
+
 int main() {
 	// Run a benchmark on the compress function of nvcc
 	size_t size = sizeof(int)*4096;
@@ -26,9 +34,20 @@ int main() {
 	cudaFree(uncompressed_data);
 	free(cpu_data);
 	
-
-        nvcomp::LZ4Compressor<uint32_t> compressor(
-        (unsigned int *)uncompressed_data, 4096, 65536);
+	float * data;	
+	cudaMalloc(reinterpret_cast<void**>(&data), sizeof(float)*4096000);
+	
+	float * data1 = (float *) malloc(sizeof(float)*4096000);
+	
+	for(int i = 0; i < 4096000; i++) 
+		data1[i] = rand();
+	
+	cudaMemcpy((void*)data, data1, 4096000, cudaMemcpyHostToDevice);
+	
+	cout << "input size: " << sizeof(float)*4096000 << endl;
+	
+        nvcomp::LZ4Compressor<uint8_t> compressor(
+        reinterpret_cast<uint8_t*>(data), 4096000*sizeof(float), 1 << 16);
         const size_t temp_size = compressor.get_temp_size();
 
         void * temp_space;
@@ -37,18 +56,29 @@ int main() {
         size_t output_size = compressor.get_max_output_size(
     temp_space, temp_size);
 
+	cout << "Output size is: " << output_size << endl; 
+
         void * output_space;
         cudaMalloc(&output_space, output_size);
-
+	
 
         cudaStream_t stream;
+	  cudaStreamCreate(&stream);
 
-cudaError_t cudaErr = cudaStreamCreate(&stream);
+	cudaError_t cudaErr = cudaStreamCreate(&stream);
         nvcompError_t status;
-compressor.compress_async(temp_space,
+	compressor.compress_async(temp_space,
     temp_size, output_space, &output_size, stream);
 
+	
+	benchmark_assert(
+      status == nvcompSuccess, "nvcompCascadedCompressAsync not successful");
+ 	cudaStreamSynchronize(stream);
 
-	std::cout << "Done" << std::endl;
+	cout << "Output size is: " << output_size << endl;
+
+	cudaFree(temp_space);
+	cudaFree(output_space);
+	
 
 }
