@@ -9,6 +9,7 @@ g++ zstd-benchmark.cpp -std=c++11 -I /usr/local/cuda/ -I /usr/local/cuda/include
 
 Clone and build Nvidia/nvcomp according to instructions the their repo
 Also add cuda and nvcomp to LD preload path.
+export LD_LIBRARY_PATH=/home/shauryapatel1995/nvcomp/build/lib:$LD_LIBRARY_PATH
 g++ -I /usr/local/cuda/ -I /usr/local/cuda/include -I./nvcomp/build/include compress-benchmark.cpp -o compress -lcudart -lnvcomp -L/usr/local/cuda/lib64 -L./nvcomp/build/lib 
 
 Windows - 
