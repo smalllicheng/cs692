@@ -16,3 +16,9 @@ Windows -
 g++ zstd-benchmark.cpp -std=c++11 -I./zstd/lib -I./zstd/ -I "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\include" -isystem benchmark/include -Lbenchmark/build/src -L./zstd/lib -lzstd -lbenchmark -lpthread -o mybenchmark
 
 Replace "C:\..." with the CUDA installation address
+
+zfp benchmarks - 
+Clone zfp and use the cmake -DZFP_WITH_CUDA=ON .. to create vuild files with cuda compiler on. 
+Use LD_LIBRARY_PATH to add libraries to it.
+Compile g++ -std=c++11 -I/usr/local/cuda/ -I/usr/local/cuda/include benchmark_trial.cpp -o zfp_benchmark -lzfp -lcudart -L/usr/local/cuda/lib64 -L../zfp/build/lib
+run ./zfp_benchmark 40960000
