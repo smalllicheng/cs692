@@ -32,6 +32,19 @@ Processing ImageNet2012
 
 2. Use the script to extract it recursively https://gist.github.com/BIGBALLON/8a71d225eff18d88e469e6ea9b39cef4
 
+2.1. Comment line 34 in the script "wget -qO- https:...." which makes the format conflict with converting script
+
 3. Get list file from caffe https://github.com/BVLC/caffe/blob/master/data/ilsvrc12/get_ilsvrc_aux.sh
 
-4. Use the scripts SN provided, TBC
+4. Use the scripts SN provided, I choose to fill in the parameters instead of using args Here's my example for val.
+
+    src_folder = "/home/jupyter/imagenet/val"    #sys.argv[1]
+    list_file = "/home/jupyter/imagenet/val.txt"  #sys.argv[2]
+    dst_folder = "/home/jupyter/inet" #sys.argv[3]
+    prefix = "val" #sys.argv[4]
+    height, width = 256,256 #int(sys.argv[5]), int(sys.argv[6])
+    splits = 1 #int(sys.argv[7])
+    shuffle = False #int(sys.argv[8]) == 1
+    workers = 8 #int(sys.argv[9])
+    
+5. Compute the image mean
