@@ -55,3 +55,6 @@ Processing ImageNet2012
     workers = 8 #int(sys.argv[9])
     
 5. Compute the image mean
+5.1 move mean.py, binary.py to the directory we created in step 4
+5.2 fillin or use args as they mentioned in example
+6. Wait
