@@ -39,12 +39,19 @@ Processing ImageNet2012
 4. Use the scripts SN provided, I choose to fill in the parameters instead of using args Here's my example for val.
 
     src_folder = "/home/jupyter/imagenet/val"    #sys.argv[1]
+    
     list_file = "/home/jupyter/imagenet/val.txt"  #sys.argv[2]
+    
     dst_folder = "/home/jupyter/inet" #sys.argv[3]
+    
     prefix = "val" #sys.argv[4]
+    
     height, width = 256,256 #int(sys.argv[5]), int(sys.argv[6])
+    
     splits = 1 #int(sys.argv[7])
+    
     shuffle = False #int(sys.argv[8]) == 1
+    
     workers = 8 #int(sys.argv[9])
     
 5. Compute the image mean
