@@ -58,3 +58,7 @@ Processing ImageNet2012
 5.1 move mean.py, binary.py to the directory we created in step 4
 5.2 fillin or use args as they mentioned in example
 6. Wait
+
+
+imagenet fast download
+https://www.kaggle.com/c/imagenet-object-localization-challenge/data?select=imagenet_object_localization_patched2019.tar.gz
