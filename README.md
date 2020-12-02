@@ -62,3 +62,6 @@ Processing ImageNet2012
 
 imagenet fast download
 https://www.kaggle.com/c/imagenet-object-localization-challenge/data?select=imagenet_object_localization_patched2019.tar.gz
+
+
+cmake -DLIVENESS=1 -DRECOMPUTE_ON=1 -DLARGER=1 -DLRU_ON=1 -DBLASX_MALLOC=1 ..
